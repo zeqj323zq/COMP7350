@@ -13,8 +13,8 @@ module.exports = {
       type: "string"
     },
 
-    order: {
-      this : new Order(),
+    oid: {
+      type: "json"
     },
 
     phoneNumber: {

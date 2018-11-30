@@ -28,6 +28,14 @@ module.exports.routes = {
     view: 'pages/homepage'
   },
 
+  'POST ': 'ProductController.create',
+
+  'GET ': 'ProductController.show',
+
+  'POST ': 'ItemController.delete',
+
+  'POST ': 'ItemController.update',
+
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *
