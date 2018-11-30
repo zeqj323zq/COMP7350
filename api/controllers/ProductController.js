@@ -58,7 +58,7 @@ router.all('*',function (req, res, next) {
 
 module.exports = {
 
-    async create(req, res, next) {
+    create : async function(req, res, next) {
 
         var product = JSON.parse(req.body);
     
@@ -72,7 +72,7 @@ module.exports = {
     
     },
 
-    async show(req, res, next) {
+    show : async function(req, res, next) {
         //
         var objs = await Product.find();
         res.send(JSON.stringify({ products: objs }));
@@ -81,7 +81,7 @@ module.exports = {
     
     },
 
-    async delete(req, res, next) {
+    delete : async function(req, res, next) {
         //
         var id = JSON.parse(req.params.pid);
         var objs = await Product.destroy(id).fetch();
@@ -95,7 +95,7 @@ module.exports = {
     
     },
 
-    async update(req, res, next) {
+    update : async function(req, res, next) {
         //
         var product = JSON.parse(req.body);
         if (typeof product === "undefined")
