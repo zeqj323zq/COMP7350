@@ -32,9 +32,9 @@ module.exports.routes = {
 
   'GET ': 'ProductController.show',
 
-  'POST ': 'ItemController.delete',
+  'POST ': 'ProductController.delete',
 
-  'POST ': 'ItemController.update',
+  'POST ': 'ProductController.update',
 
   /***************************************************************************
   *                                                                          *
