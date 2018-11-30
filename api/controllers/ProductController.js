@@ -13,7 +13,7 @@ var router = express();
 var jsonParser = bodyParser.json();
 
 //allow custom header and CORS
-router.all('*',function (req, res, next) {
+router.all('*',function (req, res, ) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
@@ -22,23 +22,23 @@ router.all('*',function (req, res, next) {
       res.send(200); /让options请求快速返回/
     }
     else {
-      next();
+      ();
     }
   })
 
 .use(cors())
 
-.use(function(req, res, next) {
+.use(function(req, res, ) {
 
     var err = new Error('Not Found');
     err.status = 404;
 
-    next(err);
+    (err);
 
 })
 
 // error handler
-.use(function(err, req, res, next) {
+.use(function(err, req, res, ) {
 
     // set locals, only providing error in development
     res.locals.message = err.message;
@@ -58,9 +58,9 @@ router.all('*',function (req, res, next) {
 
 module.exports = {
 
-    create : async function(req, res, next) {
+    create : async function(req, res) {
 
-        var product = JSON.parse(req.body);
+        var product = req.body;
     
         if (typeof product === "undefined")
           return res.badRequest(+"Form-data not received.");
@@ -68,22 +68,18 @@ module.exports = {
         await Product.create(product);
         res.json({result: 'success', product: req.body});
     
-        next();
-    
     },
 
-    show : async function(req, res, next) {
+    show : async function(req, res) {
         //
         var objs = await Product.find();
-        res.send(JSON.stringify({ products: objs }));
-    
-        next();
+        res.send({ products: objs });
     
     },
 
-    delete : async function(req, res, next) {
+    delete : async function(req, res) {
         //
-        var id = JSON.parse(req.params.pid);
+        var id = req.params.pid;
         var objs = await Product.destroy(id).fetch();
       
         if (objs.length == 0) 
@@ -91,17 +87,15 @@ module.exports = {
     
         res.redirect('/')
     
-        next();
-    
     },
 
-    update : async function(req, res, next) {
+    update : async function(req, res) {
         //
-        var product = JSON.parse(req.body);
+        var product = req.body;
         if (typeof product === "undefined")
                 return res.badRequest("Form-data not received.");
     
-                var objs = await Product.update(JSON.parse(req.params.pid)).set({
+                var objs = await Product.update(req.params.pid).set({
                   pid: product.pid,
                   imgUrl: product.imgUrl,
                   pType: product.pType,
@@ -112,8 +106,6 @@ module.exports = {
               }).fetch();
       
               if (objs.length == 0) return res.notFound();
-    
-        next();
     
     },
 

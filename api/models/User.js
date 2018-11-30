@@ -9,7 +9,11 @@ module.exports = {
 
   attributes: {
 
-    cname: {
+    username: {
+      type: "string"
+    },
+
+    position: {
       type: "string"
     },
 

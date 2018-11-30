@@ -46,7 +46,7 @@
   },
 
   "rules": {
-    "callback-return":              ["error", ["done", "proceed", "next", "onwards", "callback", "cb"]],
+    "callback-return":              ["error", ["done", "proceed", "", "onwards", "callback", "cb"]],
     "camelcase":                    ["warn", {"properties":"always"}],
     "comma-style":                  ["warn", "last"],
     "curly":                        ["error"],

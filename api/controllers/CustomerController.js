@@ -7,9 +7,9 @@
 
 module.exports = {
 
-    async create(req, res, next) {
+    async create(req, res) {
 
-        var product = JSON.parse(req.body);
+        var product = req.body;
     
         if (typeof product === "undefined")
           return res.badRequest(+"Form-data not received.");
@@ -17,22 +17,18 @@ module.exports = {
         await Product.create(product);
         res.json({result: 'success', product: req.body});
     
-        next();
-    
     },
 
-    async show(req, res, next) {
+    async show(req, res) {
         //
         var objs = await Product.find();
-        res.send(JSON.stringify({ products: objs }));
-    
-        next();
+        res.send({ products: objs });
     
     },
 
-    async delete(req, res, next) {
+    async delete(req, res, ) {
         //
-        var id = JSON.parse(req.params.pid);
+        var id = req.params.pid;
         var objs = await Product.destroy(id).fetch();
       
         if (objs.length == 0) 
@@ -40,17 +36,15 @@ module.exports = {
     
         res.redirect('/')
     
-        next();
-    
     },
 
-    async update(req, res, next) {
+    async update(req, res) {
         //
-        var product = JSON.parse(req.body);
+        var product = req.body;
         if (typeof product === "undefined")
                 return res.badRequest("Form-data not received.");
     
-                var objs = await Product.update(JSON.parse(req.params.pid)).set({
+                var objs = await Product.update(req.params.pid).set({
                   pid: product.pid,
                   imgUrl: product.imgUrl,
                   pType: product.pType,
@@ -61,8 +55,6 @@ module.exports = {
               }).fetch();
       
               if (objs.length == 0) return res.notFound();
-    
-        next();
     
     },
 

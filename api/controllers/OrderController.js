@@ -7,9 +7,9 @@
 
 module.exports = {
 
-    create : async function(req, res, next) {
+    create : async function(req, res) {
 
-        var order = JSON.parse(req.body);
+        var order = req.body;
     
         if (typeof order === "undefined")
           return res.badRequest(+"Form-data not received.");
@@ -17,22 +17,33 @@ module.exports = {
         await order.create(order);
         res.json({result: 'success', order: req.body});
     
-        next();
+    },
+
+    Search : async function(req, res, err) {
+        //
+        var orderId = req.params.oid;
+        var customerName = req.params.cname;
+        if (typeof customerName==="undefined"&&typeof orderId!=="undefined"){
+            var obj = await Order.findOne(req.params.oid);
+            res.send({ order: obj });
+            var pObj = await Order.find(objs.pid);
+            res.send({ product: pObj });
+        }
+        if (typeof customerName!=="undefined"&&typeof orderId==="undefined"){
+            var objs = await Order.find(req.params.cname);
+            res.send({ orders: objs });
+            var pObj = await Order.find(objs.pid);
+            res.send({ product: pObj });
+        }
+        else{
+            return err;
+        }
     
     },
 
-    show : async function(req, res, next) {
+    delete : async function(req, res) {
         //
-        var objs = await Order.find();
-        res.send(JSON.stringify({ orders: objs }));
-    
-        next();
-    
-    },
-
-    delete : async function(req, res, next) {
-        //
-        var id = JSON.parse(req.params.oid);
+        var id = req.params.oid;
         var objs = await Product.destroy(id).fetch();
       
         if (objs.length == 0) 
@@ -40,29 +51,24 @@ module.exports = {
     
         res.redirect('/')
     
-        next();
-    
     },
 
-    update : async function(req, res, next) {
+    update : async function(req, res) {
         //
-        var order = JSON.parse(req.body);
+        var order = req.body;
         if (typeof order === "undefined")
                 return res.badRequest("Form-data not received.");
     
-                var objs = await Order.update(JSON.parse(req.params.oid)).set({
+                var objs = await Order.update(req.params.oid).set({
                   oid: order.oid,
                   date: order.date,
-                  pType: product.pType,
-                  color: product.color,
-                  size: puduct.size,
-                  price: product.price,
-                  count: product.count,
+                  cname: order.cname,
+                  pid: order.pid,
+                  fee: order.fee,
+                  confirmedState: order.confirmedState,
               }).fetch();
       
               if (objs.length == 0) return res.notFound();
-    
-        next();
     
     },
 

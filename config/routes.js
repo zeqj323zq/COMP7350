@@ -28,13 +28,13 @@ module.exports.routes = {
     view: 'pages/homepage'
   },
 
-  '/product/create': 'ProductController.create',
+  ' /product/create': 'ProductController.create',
 
-  '/product/show': 'ProductController.show',
+  ' /product/show': 'ProductController.show',
 
-  '/product/delete': 'ProductController.delete',
+  ' /product/delete': 'ProductController.delete',
 
-  '/product/updata': 'ProductController.update',
+  ' /product/update': 'ProductController.update',
 
   /***************************************************************************
   *                                                                          *
