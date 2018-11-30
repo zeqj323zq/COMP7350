@@ -6,7 +6,54 @@
  */
 
 module.exports = {
-  
+
+    create : async function(req, res) {
+
+        var user = req.body;
+    
+        if (typeof user === "undefined")
+          return res.badRequest(+"Form-data not received.");
+    
+        await User.create(user);
+        res.send({result: 'success', user: req.body});
+    
+    },
+
+    show : async function(req, res) {
+        //
+        var objs = await User.find();
+        res.send({ users: objs });
+    
+    },
+
+    delete : async function(req, res) {
+        //
+        var id = req.params.pid;
+        var objs = await User.destroy(id).fetch();
+      
+        if (objs.length == 0) 
+        return res.notFound();
+    
+        res.redirect('/')
+    
+    },
+
+    update : async function(req, res) {
+        //
+        var user = req.body;
+        if (typeof user === "undefined")
+                return res.badRequest("Form-data not received.");
+    
+                var objs = await User.update(req.params.username).set({
+                  username: user.username,
+                  position: user.position,
+                  password: user.passward,
+                  phoneNumber: user.phoneNumber,
+              }).fetch();
+      
+              if (objs.length == 0) return res.notFound();
+    
+    },
 
 };
 

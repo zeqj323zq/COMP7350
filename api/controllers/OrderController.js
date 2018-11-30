@@ -13,9 +13,18 @@ module.exports = {
     
         if (typeof order === "undefined")
           return res.badRequest(+"Form-data not received.");
-    
+
+        await order.fee.add(Product.findOne(order.pid).price*order.amount);
+        await Product.findOne(order.pid).count - order.amount;
         await order.create(order);
-        res.json({result: 'success', order: req.body});
+        res.send({result: 'success', order: req.body});
+    
+    },
+
+    show : async function(req, res) {
+        //
+        var objs = await Order.find();
+        res.send({ orders: objs });
     
     },
 
@@ -63,12 +72,25 @@ module.exports = {
                   oid: order.oid,
                   date: order.date,
                   cname: order.cname,
+                  phoneNumber: order.phoneNumber,
+                  address: address,
                   pid: order.pid,
                   fee: order.fee,
                   confirmedState: order.confirmedState,
               }).fetch();
       
               if (objs.length == 0) return res.notFound();
+    
+    },
+
+    totalSales : async function(req, res) {
+
+        var objs = await Order.find();
+
+        for(k in objs){
+            objs.fee++
+        }
+        res.send(orders.fee);
     
     },
 

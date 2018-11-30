@@ -9,27 +9,27 @@ module.exports = {
 
     async create(req, res) {
 
-        var product = req.body;
+        var customer = req.body;
     
-        if (typeof product === "undefined")
+        if (typeof customer === "undefined")
           return res.badRequest(+"Form-data not received.");
     
-        await Product.create(product);
-        res.json({result: 'success', product: req.body});
+        await Customer.create(customer);
+        res.json({result: 'success', customer: req.body});
     
     },
 
     async show(req, res) {
         //
-        var objs = await Product.find();
-        res.send({ products: objs });
+        var objs = await Customer.find();
+        res.send({ customers: objs });
     
     },
 
     async delete(req, res, ) {
         //
-        var id = req.params.pid;
-        var objs = await Product.destroy(id).fetch();
+        var name = req.params.cname;
+        var objs = await Product.destroy(name).fetch();
       
         if (objs.length == 0) 
         return res.notFound();
@@ -40,18 +40,15 @@ module.exports = {
 
     async update(req, res) {
         //
-        var product = req.body;
-        if (typeof product === "undefined")
+        var customer = req.body;
+        if (typeof customer === "undefined")
                 return res.badRequest("Form-data not received.");
     
-                var objs = await Product.update(req.params.pid).set({
-                  pid: product.pid,
-                  imgUrl: product.imgUrl,
-                  pType: product.pType,
-                  color: product.color,
-                  size: puduct.size,
-                  price: product.price,
-                  count: product.count,
+                var objs = await Product.update(req.params.cname).set({
+                  cname: customer.cname,
+                  oid: customer.oid,
+                  phoneNumber: customer.phoneNumber,
+                  address: customer.address,
               }).fetch();
       
               if (objs.length == 0) return res.notFound();

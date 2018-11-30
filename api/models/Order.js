@@ -22,8 +22,20 @@ module.exports = {
       type: "string"
     },
 
+    phoneNumber: {
+      type: "number"
+    },
+
+    address: {
+      type: "string"
+    },
+
     pid: {
       type: "String"
+    },
+
+    amount: {
+      type: "number"
     },
 
     fee: {
