@@ -23,7 +23,7 @@ module.exports = {
     },
 
     pid: {
-      type: "json"
+      type: "String"
     },
 
     fee: {

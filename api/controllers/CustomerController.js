@@ -5,7 +5,7 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
- var express = require('express');
+var express = require('express');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 

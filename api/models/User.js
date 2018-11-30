@@ -13,10 +13,6 @@ module.exports = {
       type: "string"
     },
 
-    oid: {
-      type: "json",
-    },
-
     phoneNumber: {
       type: "number"
     },

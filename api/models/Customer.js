@@ -13,7 +13,7 @@ module.exports = {
       type: "string"
     },
 
-    oid: {
+    order: {
       this : new Order(),
     },
 
