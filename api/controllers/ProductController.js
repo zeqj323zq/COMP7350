@@ -72,7 +72,7 @@ module.exports = {
     
     },
 
-    async function(req, res, next) {
+    async show(req, res, next) {
         //
         var objs = await Product.find();
         res.send(JSON.stringify({ products: objs }));
@@ -81,7 +81,7 @@ module.exports = {
     
     },
 
-    async function(req, res, next) {
+    async delete(req, res, next) {
         //
         var id = JSON.parse(req.params.pid);
         var objs = await Product.destroy(id).fetch();
@@ -95,7 +95,7 @@ module.exports = {
     
     },
 
-    async function(req, res, next) {
+    async update(req, res, next) {
         //
         var product = JSON.parse(req.body);
         if (typeof product === "undefined")
