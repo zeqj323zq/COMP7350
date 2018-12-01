@@ -85,8 +85,8 @@ module.exports = {
         }
         else{
             var obj = await Product.find({
-                where: { pid: { contais: pid } },
-                sort: 'name'});
+                where: { pid: { contains: pid } },
+                sort: 'pid'});
                 res.send({ product : obj });
         }
     
