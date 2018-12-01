@@ -17,14 +17,14 @@ module.exports = {
         await order.fee.add(Product.findOne(order.pid).price*order.amount);
         await Product.findOne(order.pid).count - order.amount;
         await order.create(order);
-        res.send({result: 'success', order: req.body});
+        res.json({result: 'success', order: req.body});
     
     },
 
     show : async function(req, res) {
         //
         var objs = await Order.find();
-        res.send({ orders: objs });
+        res.json({ orders: objs });
     
     },
 
@@ -35,14 +35,14 @@ module.exports = {
         if (typeof customerName==="undefined"&&typeof orderId!=="undefined"){
             var obj = await Order.findOne(req.params.oid);
             res.send({ order: obj });
-            var pObj = await Order.find(objs.pid);
-            res.send({ product: pObj });
+            //var pObj = await Order.find(objs.pid);
+            //res.send({ product: pObj });
         }
         if (typeof customerName!=="undefined"&&typeof orderId==="undefined"){
             var objs = await Order.find(req.params.cname);
             res.send({ orders: objs });
-            var pObj = await Order.find(objs.pid);
-            res.send({ product: pObj });
+            //var pObj = await Order.find(objs.pid);
+            //res.send({ product: pObj });
         }
         else{
             return err;
@@ -54,11 +54,12 @@ module.exports = {
         //
         var id = req.params.oid;
         var objs = await Product.destroy(id).fetch();
+        res.json({result: 'success'});
       
         if (objs.length == 0) 
         return res.notFound();
     
-        res.redirect('/')
+        //res.redirect('/')
     
     },
 
@@ -68,7 +69,7 @@ module.exports = {
         if (typeof order === "undefined")
                 return res.badRequest("Form-data not received.");
     
-                var objs = await Order.update(req.params.oid).set({
+                var objs = await Order.update(req.body.oid).set({
                   oid: order.oid,
                   date: order.date,
                   cname: order.cname,
@@ -76,8 +77,10 @@ module.exports = {
                   address: address,
                   pid: order.pid,
                   fee: order.fee,
+                  owner: order.owner,
                   confirmedState: order.confirmedState,
               }).fetch();
+              res.json({result: 'success'});
       
               if (objs.length == 0) return res.notFound();
     

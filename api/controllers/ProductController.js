@@ -77,6 +77,19 @@ module.exports = {
     
     },
 
+    Search : async function(req, res) {
+        //
+        var pid = req.params.pid;
+        if (typeof pid==="undefined"){
+            res.json({result: 'error'});
+        }
+        else{
+            var obj = await Product.findOne(req.params.pid);
+            res.send({ product : obj });
+        }
+    
+    },
+
     delete : async function(req, res) {
         //
         var id = req.params.pid;
@@ -84,8 +97,6 @@ module.exports = {
       
         if (objs.length == 0) 
         return res.notFound();
-    
-        res.redirect('/')
     
     },
 
@@ -95,15 +106,15 @@ module.exports = {
         if (typeof product === "undefined")
                 return res.badRequest("Form-data not received.");
     
-                var objs = await Product.update(req.params.pid).set({
+                var objs = await Product.update(req.body.id).set({
                   pid: product.pid,
-                  imgUrl: product.imgUrl,
                   pType: product.pType,
                   color: product.color,
                   size: puduct.size,
                   price: product.price,
                   count: product.count,
               }).fetch();
+              res.json({result: 'success'});
       
               if (objs.length == 0) return res.notFound();
     

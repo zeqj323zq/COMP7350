@@ -26,6 +26,12 @@ module.exports.bootstrap = async function(done) {
     // etc.
   ]);
 
+  await Product.createEach([
+    { pid: "bag1", img: "xxx", pType: "shoulderBag", color: "black", size:"medium", price:40, count:20},
+    { pid: "bag2", img: "xxx", pType: "backpack", color: "yellow", size:"small", price:60, count:50},
+    // etc.
+    ]);
+
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)
   return done();

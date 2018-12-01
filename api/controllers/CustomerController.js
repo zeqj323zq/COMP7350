@@ -33,9 +33,7 @@ module.exports = {
       
         if (objs.length == 0) 
         return res.notFound();
-    
-        res.redirect('/')
-    
+   
     },
 
     async update(req, res) {
@@ -44,12 +42,13 @@ module.exports = {
         if (typeof customer === "undefined")
                 return res.badRequest("Form-data not received.");
     
-                var objs = await Product.update(req.params.cname).set({
+                var objs = await Product.update(req.body.cname).set({
                   cname: customer.cname,
                   oid: customer.oid,
                   phoneNumber: customer.phoneNumber,
                   address: customer.address,
               }).fetch();
+              res.json({result: 'success'});
       
               if (objs.length == 0) return res.notFound();
     

@@ -13,10 +13,6 @@ module.exports = {
       type: "string"
     },
 
-    img: {
-      type: "string"
-    },
-
     pType: {
       type: "string"
     },

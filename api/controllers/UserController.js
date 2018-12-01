@@ -34,8 +34,6 @@ module.exports = {
         if (objs.length == 0) 
         return res.notFound();
     
-        res.redirect('/')
-    
     },
 
     update : async function(req, res) {
@@ -44,12 +42,13 @@ module.exports = {
         if (typeof user === "undefined")
                 return res.badRequest("Form-data not received.");
     
-                var objs = await User.update(req.params.username).set({
+                var objs = await User.update(req.body.username).set({
                   username: user.username,
                   position: user.position,
                   password: user.passward,
                   phoneNumber: user.phoneNumber,
               }).fetch();
+              res.json({result: 'success'});
       
               if (objs.length == 0) return res.notFound();
     

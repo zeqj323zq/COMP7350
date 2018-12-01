@@ -14,8 +14,7 @@ module.exports = {
     },
 
     date: {
-      type: 'ref',
-      columnType: 'datetime'
+      type: 'string'
     },
 
     cname: {
@@ -42,8 +41,13 @@ module.exports = {
       type: "number"
     },
 
+    owner: {
+      type: "string"
+    },
+
     confirmedState: {
-      type: "Boolean"
+      type: "Boolean",
+      defaultsTo: 'F'
     },
 
   },
