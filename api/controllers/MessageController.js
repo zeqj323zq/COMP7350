@@ -21,10 +21,20 @@ module.exports = {
 
     show : async function(req, res) {
         //
-        var objs = await Message.find();
-        res.send({ Messages: objs });
+        var msgs = await Message.find();
+        res.send({ Messages: msgs });
     
     },
+
+    personalSale : async function(req, res) {
+        var msg = req.body;
+        var orders = await Order.find(msg.owner);
+        for(k in orders){
+            var sale = 0;
+            sale = sale + orders.fee
+        }
+        res.send(sale);
+    }
 
 };
 

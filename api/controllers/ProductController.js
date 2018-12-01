@@ -79,14 +79,14 @@ module.exports = {
 
     search : async function(req, res) {
         //
-        var pid = req.params.pid;
+        var productId = req.params.pid;
         if (typeof pid==="undefined"){
             res.json({result: 'error'});
         }
         else{
             var obj = await Product.find({
-                where: { pid: { contains: pid } },
-                sort: 'pid'});
+                where: { pid : productId }
+                });
                 res.send({ product : obj });
         }
     

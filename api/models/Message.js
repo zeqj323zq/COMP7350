@@ -21,7 +21,7 @@ module.exports = {
       type: "string"
     },
 
-    pid: {
+    oid: {
       type: "string"
     }
 

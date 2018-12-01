@@ -14,7 +14,7 @@ module.exports = {
         if (typeof order === "undefined")
           return res.badRequest(+"Form-data not received.");
 
-        await order.fee.add(Product.findOne(order.pid).price*order.amount);
+        await order.fee.set(Product.findOne(order.pid).price*order.amount);
         await Product.findOne(order.pid).count - order.amount;
         await order.create(order);
         res.json({result: 'success', order: req.body});
@@ -32,22 +32,25 @@ module.exports = {
         //
         var orderId = req.params.oid;
         var customerName = req.params.cname;
-        if (typeof customerName==="undefined"&&typeof orderId!=="undefined"){
+        var pNumber = req.params.phoneNumber;
+        var ads = req.params.address;
+        var agent = req.params.owner;
+        if (typeof customerName!=="undefined"||typeof orderId!=="undefined"||typeof phoneNumber!=="undefined"||typeof address!=="undefined"||typeof agent!=="undefined"){
             var obj = await Order.find({
-                where: { oid: { contains: orderId } },
-                sort: 'oid'});
+                where: { oid : orderId, cname : customerName, phoneNumber : pNumber, address : ads, owner : agent}
+            });
                 res.send({ order : obj });
             //var pObj = await Order.find(objs.pid);
             //res.send({ product: pObj });
         }
-        if (typeof customerName!=="undefined"&&typeof orderId==="undefined"){
+        /*if (typeof customerName!=="undefined"&&typeof orderId==="undefined"){
             var obj = await Order.find({
-                where: { cname: { contains: customerName } },
-                sort: 'cname'});
+                where: { cname : customerName }
+            });
                 res.send({ orders : obj });
             //var pObj = await Order.find(objs.pid);
             //res.send({ product: pObj });
-        }
+        }*/
         else{
             res.json({result: 'error'});
         }
@@ -95,9 +98,10 @@ module.exports = {
         var objs = await Order.find();
 
         for(k in objs){
-            objs.fee++
+            var sale = 0;
+            sale = temp + orders.fee
         }
-        res.send(orders.fee);
+        res.send(sale);
     
     },
 
