@@ -84,8 +84,10 @@ module.exports = {
             res.json({result: 'error'});
         }
         else{
-            var obj = await Product.findOne(req.params.pid);
-            res.send({ product : obj });
+            var obj = await Product.find({
+                where: { pid: { contais: pid } },
+                sort: 'name'});
+                res.send({ product : obj });
         }
     
     },

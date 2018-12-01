@@ -47,7 +47,7 @@ module.exports = {
 
     confirmedState: {
       type: "Boolean",
-      defaultsTo: 'F'
+      defaultsTo: 'false'
     },
 
   },

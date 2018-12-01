@@ -33,19 +33,23 @@ module.exports = {
         var orderId = req.params.oid;
         var customerName = req.params.cname;
         if (typeof customerName==="undefined"&&typeof orderId!=="undefined"){
-            var obj = await Order.findOne(req.params.oid);
-            res.send({ order: obj });
+            var obj = await Order.find({
+                where: { oid: { contais: orderId } },
+                sort: 'name'});
+                res.send({ order : obj });
             //var pObj = await Order.find(objs.pid);
             //res.send({ product: pObj });
         }
         if (typeof customerName!=="undefined"&&typeof orderId==="undefined"){
-            var objs = await Order.find(req.params.cname);
-            res.send({ orders: objs });
+            var obj = await Order.find({
+                where: { cname: { contais: customerName } },
+                sort: 'name'});
+                res.send({ orders : obj });
             //var pObj = await Order.find(objs.pid);
             //res.send({ product: pObj });
         }
         else{
-            return err;
+            res.json({result: 'error'});
         }
     
     },
