@@ -77,7 +77,7 @@ module.exports = {
     
     },
 
-    Search : async function(req, res) {
+    search : async function(req, res) {
         //
         var pid = req.params.pid;
         if (typeof pid==="undefined"){

@@ -28,7 +28,7 @@ module.exports = {
     
     },
 
-    Search : async function(req, res, err) {
+    search : async function(req, res, err) {
         //
         var orderId = req.params.oid;
         var customerName = req.params.cname;
