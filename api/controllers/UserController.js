@@ -65,15 +65,16 @@ module.exports = {
         const saltRounds = 10;
         const hash = await sails.bcrypt.hash(user.passward, saltRounds);
 
-        if (typeof user === "undefined")
+        if (typeof user === "undefined"){
                 return res.badRequest("Form-data not received.");
-    
-                var objs = await User.update({id : user.id}).set({
-                  username: user.username,
-                  position: user.position,
-                  password: hash,
-                  phoneNumber: user.phoneNumber,
-              }).fetch();
+        }
+
+        var objs = await User.update({id : user.id}).set({
+            username: user.username,
+            position: user.position,
+            password: hash,
+            phoneNumber: user.phoneNumber,
+        }).fetch();                
       
               if (objs.length == 0) return res.notFound();
               res.json({result: 'success'});

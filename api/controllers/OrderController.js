@@ -74,8 +74,10 @@ module.exports = {
     update : async function(req, res) {
         //
         var order = req.body;
-        if (typeof order === "undefined")
+        if (typeof order === "undefined"){
             return res.badRequest("Form-data not received.");
+        }
+
         var objs = await Order.update({id : order.id}).set({
             oid: order.oid,
             date: order.date,
@@ -87,6 +89,7 @@ module.exports = {
             owner: order.owner,
             confirmedState: order.confirmedState,
         }).fetch();
+        
         if (objs.length == 0) return res.notFound();
         res.json({result: 'success'});
     },

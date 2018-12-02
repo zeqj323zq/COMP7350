@@ -40,15 +40,16 @@ module.exports = {
     async update(req, res) {
         //
         var customer = req.body;
-        if (typeof customer === "undefined")
+        if (typeof customer === "undefined"){
                 return res.badRequest("Form-data not received.");
-    
-                var objs = await Customer.update({id : customer.id}).set({
-                  cname: customer.cname,
-                  oid: customer.oid,
-                  phoneNumber: customer.phoneNumber,
-                  address: customer.address,
-              }).fetch();
+        }
+        var objs = await Customer.update({id : customer.id}).set({
+            cname: customer.cname,
+            oid: customer.oid,
+            phoneNumber: customer.phoneNumber,
+            address: customer.address,
+        }).fetch();
+                
       
               if (objs.length == 0) return res.notFound();
               res.json({result: 'success'});
