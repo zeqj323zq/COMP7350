@@ -28,44 +28,6 @@ module.exports.routes = {
     view: 'pages/homepage'
   },
 
-  ' /product/create': 'ProductController.create',
-
-  ' /product/show': 'ProductController.show',
-
-  ' /product/search': 'ProductController.show',
-
-  ' /product/delete': 'ProductController.delete',
-
-  ' /product/update': 'ProductController.update',
-
-  ' /order/create': 'OrderController.create',
-
-  ' /order/show': 'OrderController.show',
-
-  ' /order/search': 'OrderController.search',
-
-  ' /order/delete': 'OrderController.delete',
-
-  ' /order/update': 'OrderController.update',
-
-  ' /order/totalSale': 'OrderController.totalSale',
-
-  ' /customer/create': 'CustomerController.create',
-
-  ' /customer/show': 'CustomerController.show',
-
-  ' /customer/delete': 'CustomerController.delete',
-
-  ' /customer/update': 'CustomerController.update',
-
-  ' /user/create': 'UserController.create',
-
-  ' /user/show': 'UserController.show',
-
-  ' /user/delete': 'UserController.delete',
-
-  ' /user/update': 'UserController.update',
-
 
   /***************************************************************************
   *                                                                          *

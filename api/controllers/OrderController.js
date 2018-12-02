@@ -59,13 +59,13 @@ module.exports = {
 
     delete : async function(req, res) {
         //
-        var id = req.params.oid;
+        var id = req.body.id;
         var objs = await Product.destroy(id).fetch();
-        res.json({result: 'success'});
       
         if (objs.length == 0) 
         return res.notFound();
     
+        res.json({result: 'success'});
         //res.redirect('/')
     
     },
@@ -74,23 +74,20 @@ module.exports = {
         //
         var order = req.body;
         if (typeof order === "undefined")
-                return res.badRequest("Form-data not received.");
-    
-                var objs = await Order.update(req.body.oid).set({
-                  oid: order.oid,
-                  date: order.date,
-                  cname: order.cname,
-                  phoneNumber: order.phoneNumber,
-                  address: address,
-                  pid: order.pid,
-                  fee: order.fee,
-                  owner: order.owner,
-                  confirmedState: order.confirmedState,
-              }).fetch();
-              res.json({result: 'success'});
-      
-              if (objs.length == 0) return res.notFound();
-    
+            return res.badRequest("Form-data not received.");
+        var objs = await Order.update(order.id).set({
+            oid: order.oid,
+            date: order.date,
+            cname: order.cname,
+            phoneNumber: order.phoneNumber,
+            address: order.address,
+            pid: order.pid,
+            fee: order.fee,
+            owner: order.owner,
+            confirmedState: order.confirmedState,
+        }).fetch();
+        if (objs.length == 0) return res.notFound();
+        res.json({result: 'success'});
     },
 
     totalSales : async function(req, res) {

@@ -79,27 +79,25 @@ module.exports = {
 
     search : async function(req, res) {
         //
-        var productId = req.params.pid;
-        if (typeof pid==="undefined"){
+        var productId = req.body.pid;
+        if (typeof productId==="undefined"){
             res.json({result: 'error'});
         }
         else{
-            var obj = await Product.find({
-                where: { pid : productId }
-                });
-                res.send({ product : obj });
+            var obj = await Product.findOne({ pid : productId });
+            res.send({ product : obj });
         }
     
     },
 
     delete : async function(req, res) {
         //
-        var id = req.params.pid;
+        var id = req.body.id;
         var objs = await Product.destroy(id).fetch();
       
         if (objs.length == 0) 
         return res.notFound();
-    
+        res.json({result: 'success'});
     },
 
     update : async function(req, res) {
@@ -112,7 +110,7 @@ module.exports = {
                   pid: product.pid,
                   pType: product.pType,
                   color: product.color,
-                  size: puduct.size,
+                  size: product.size,
                   price: product.price,
                   count: product.count,
               }).fetch();
