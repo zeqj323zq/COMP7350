@@ -11,6 +11,9 @@
 
 module.exports.bootstrap = async function(done) {
 
+  sails.bcrypt = require('bcryptjs');
+  const saltRounds = 10;
+
   // By convention, this is a good place to set up fake data during development.
   //
   // For example:
@@ -44,6 +47,16 @@ module.exports.bootstrap = async function(done) {
     { owner: "Agent1", content: "Good product today!", pid: "bag1"},
     { owner: "Agent2", content: "Thsi one is really good！", pid: "bag2"},
     { owner: "Company", content: "The new product you never seen0", pid: "bag2"},
+    // etc.
+  ]);
+
+  const hash = await sails.bcrypt.hash('123456', saltRounds);
+
+  await User.createEach([
+    { "username": "Johnson", "position": "company", "phoneNumber": "123456", "address": "xxxx", "password": hash },
+    { "username": "Johnson", "position": "company", "phoneNumber": "123456", "address": "xxxx", "password": hash },
+    { "username": "Frank", "position": "agent", "phoneNumber": "123456", "address": "xxxx", "password": hash },
+    { "username": "David", "position": "agent", "phoneNumber": "123456", "address": "xxxx", "password": hash },
     // etc.
   ]);
 

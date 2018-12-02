@@ -15,9 +15,9 @@ module.exports = {
         if (typeof order === "undefined")
           return res.badRequest(+"Form-data not received.");
 
-        //await order.fee.set(Product.findOne(order.pid).price*order.amount);
         await Product.update({pid : order.pid}).set({count : newCount - order.amount});
         await order.create(order);
+        //await order.fee.set(Product.findOne({pid : order.pid}).price*order.amount);
         res.json({result: 'success', order: req.body});
     
     },
