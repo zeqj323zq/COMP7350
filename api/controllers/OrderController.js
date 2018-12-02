@@ -164,6 +164,7 @@ module.exports = {
             var item = new Object();
             item.id = products[i].pid;
             item.number = 0;
+            item.sale = 0;
             productList.push(item);
         }
         
@@ -172,7 +173,9 @@ module.exports = {
         for (var i = 0; i < orders.length; i++){
             for(var k = 0; k < productList.length; k++){
                 if(orders[i].pid == productList[k].id){
-                    productList[k].number += orders[i].amount
+                    var obj = await Product.findOne({pid : orders[i].pid});
+                    productList[k].number += orders[i].amount;
+                    productList[k].sale += orders[i].amount*obj.price;
                 }
             }
         }
