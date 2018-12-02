@@ -28,8 +28,8 @@ module.exports = {
 
     async delete(req, res) {
         //
-        var name = req.body.cname;
-        var objs = await Customer.destroy(name).fetch();
+        var id = req.body.id;
+        var objs = await Customer.destroy(id).fetch();
         res.json({result: 'success'});
       
         if (objs.length == 0) 
