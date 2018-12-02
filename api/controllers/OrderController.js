@@ -13,7 +13,8 @@ module.exports = {
     
         if (order === "undefined")
           return res.badRequest(+"Form-data not received.");
-        var newCount = Product.findOne({pid : order.pid}).count;
+        var countNumber = await Product.findOne({pid : order.pid});
+        var newCount = countNumber.count;
 
         await Product.update({pid : order.pid}).set({count : newCount - order.amount});
         //await order.fee.set(Product.findOne({pid : order.pid}).price*order.amount);

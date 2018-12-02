@@ -62,7 +62,7 @@ module.exports = {
 
         var product = req.body;
     
-        if (typeof product === "undefined")
+        if (product === "undefined")
           return res.badRequest(+"Form-data not received.");
     
         await Product.create(product);
