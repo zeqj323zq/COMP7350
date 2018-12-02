@@ -17,7 +17,7 @@ module.exports = {
 
         await Product.update({pid : order.pid}).set({count : newCount - order.amount});
         //await order.fee.set(Product.findOne({pid : order.pid}).price*order.amount);
-        await order.create(order);
+        await Order.create(order);
         res.json({result: 'success', order: req.body});
     
     },
@@ -86,7 +86,8 @@ module.exports = {
         var id = req.body.id;
         var objs = await Order.destroy(id).fetch();
       
-        if (objs.length == 0) 
+        if (objs.length == 0)
+            return res.notFound()
         res.json({result: 'success'});
     
     },
