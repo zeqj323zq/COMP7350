@@ -51,7 +51,6 @@ module.exports = {
         var objs = await User.destroy(id).fetch();
       
         if (objs.length == 0) 
-        return res.notFound();
         res.json({result: 'success'});
     
     },

@@ -29,11 +29,10 @@ module.exports = {
     delete : async function(req, res) {
         //
         var id = req.body.id;
-        var objs = await Customer.destroy(id).fetch();
-        res.json({result: 'success'});
+        var objs = await Customer.destroy(id).fetch();     
       
         if (objs.length == 0) 
-        return res.notFound();
+        res.json({result: 'success'});
    
     },
 

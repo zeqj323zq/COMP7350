@@ -10,10 +10,10 @@ module.exports = {
     create : async function(req, res) {
 
         var order = req.body;
-        var newCount = Product.findOne({pid : order.pid}).count;
     
-        if (typeof order === "undefined")
+        if (order === "undefined")
           return res.badRequest(+"Form-data not received.");
+        var newCount = Product.findOne({pid : order.pid}).count;
 
         await Product.update({pid : order.pid}).set({count : newCount - order.amount});
         //await order.fee.set(Product.findOne({pid : order.pid}).price*order.amount);
@@ -30,59 +30,54 @@ module.exports = {
     },
 
     search : async function(req, res, err) {
-        //
-        var orderId = req.body.oid;
-        var customerName = req.body.cname;
-        var pNumber = req.body.phoneNumber;
-        var ads = req.body.address;
-        var agent = req.body.owner;
-        /*if (typeof customerName!=="undefined"||typeof orderId!=="undefined"||typeof phoneNumber!=="undefined"||typeof address!=="undefined"||typeof agent!=="undefined"){
-            var obj = await Order.find({
-                where: { oid : orderId, cname : customerName, phoneNumber : pNumber, address : ads, owner : agent}
-            });
-                res.send({ order : obj });
-        }*/
-        /*if (typeof customerName!=="undefined"&&typeof orderId==="undefined"){
-            var obj = await Order.find({
-                where: { cname : customerName }
-            });
-                res.send({ orders : obj });
-            //var pObj = await Order.find(objs.pid);
-            //res.send({ product: pObj });
-        }*/
-        var obj = new Object();
+        // var orderId = req.body.oid;
+        // var customerName = req.body.cname;
+        // var pNumber = req.body.phoneNumber;
+        // var ads = req.body.address;
+        // var agent = req.body.owner;
+        // var obj = [];
+        // var order = req.body;
 
-        if (req.body!=="undefined"){
-            if (typeof orderID!=="undefined"){
-                obj = await Order.find({
-                    where: { oid : orderId }
-                });
-            }
-            if (typeof customerName!=="undefined"){
-                obj = await obj.find({
-                    where: { cname : customerName }
-                });
-            }
-            if (typeof pNumber!=="undefined"){
-                obj = await obj.find({
-                    where: { phoneNumber : pNumber }
-                });
-            }
-            if (typeof ads!=="undefined"){
-                obj = await obj.find({
-                    where: { address : ads }
-                });
-            }
-            if (typeof agent!=="undefined"){
-                obj = await obj.find({
-                    where: { owner : agent }
-                });
-            }
-        }
-        else{
+        // if (order!=="undefined"){
+        //     if (orderID!=="undefined"){
+        //         obj = await Order.find({
+        //             where: { oid : order.oid }
+        //         });
+        //     }
+        //     if (customerName!=="undefined"){
+        //         if (obj.length != 0)
+        //         obj = await obj.find({
+        //             where: { cname : order.oid }
+        //         });
+        //     }
+        //     if (pNumber!=="undefined"){
+        //         obj = await obj.find({
+        //             where: { phoneNumber : order.oid }
+        //         });
+        //     }
+        //     if (ads!=="undefined"){
+        //         obj = await obj.find({
+        //             where: { address : order.oid }
+        //         });
+        //     }
+        //     if (agent!=="undefined"){
+        //         obj = await obj.find({
+        //             where: { owner : order.oid }
+        //         });
+        //     }
+        // }
+        // else{
+        //     res.json({result: 'error'});
+        // }
+        // res.send({ order : Obj });
+        var order = req.body;
+        if (typeof order==="undefined"){
             res.json({result: 'error'});
         }
-        res.send({ order : Obj });
+        else{
+            var objs = await Order.find({ owner : order.owner });
+            res.send({ orders : objs });
+        }
     
     },
 
@@ -92,10 +87,7 @@ module.exports = {
         var objs = await Order.destroy(id).fetch();
       
         if (objs.length == 0) 
-        return res.notFound();
-    
         res.json({result: 'success'});
-        //res.redirect('/')
     
     },
 
