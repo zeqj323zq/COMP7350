@@ -15,8 +15,8 @@ module.exports = {
 
     position: {
       type: "string",
-      enum: ["admin", "finance", "marketing", "inventory", "humanRecourse", "agent"],
-      defaultsTo: "visitor"
+      enum: ["company", "agent"],
+      defaultsTo: "agent"
     },
 
     phoneNumber: {
@@ -26,6 +26,10 @@ module.exports = {
     address: {
       type: "string"
     },
+
+    password: {
+      type: "string"
+    }
 
   },
 

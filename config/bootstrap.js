@@ -40,6 +40,25 @@ module.exports.bootstrap = async function(done) {
     // etc.
   ]);
 
+  owner: {
+    type: "string"
+  },
+
+  content: {
+    type: "string"
+  },
+
+  pid: {
+    type: "string"
+  }
+
+  await Message.createEach([
+    { owner: "Agent1", content: "Good product today!", pid: "bag1"},
+    { owner: "Agent2", content: "Thsi one is really good！", pid: "bag2"},
+    { owner: "Company", content: "The new product you never seen0", pid: "bag2"},
+    // etc.
+  ]);
+
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)
   return done();
