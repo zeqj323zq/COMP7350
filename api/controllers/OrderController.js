@@ -60,7 +60,7 @@ module.exports = {
     delete : async function(req, res) {
         //
         var id = req.body.id;
-        var objs = await Product.destroy(id).fetch();
+        var objs = await Order.destroy(id).fetch();
       
         if (objs.length == 0) 
         return res.notFound();
