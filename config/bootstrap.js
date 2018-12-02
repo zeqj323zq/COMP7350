@@ -44,7 +44,7 @@ module.exports.bootstrap = async function(done) {
   await Message.createEach([
     { owner: "David", content: "Good product today!", pid: "bag1"},
     { owner: "Frank", content: "Thsi one is really good！", pid: "bag2"},
-    { owner: "Company", content: "The new product you never seen0", pid: "bag2"},
+    { owner: "Company", content: "The new product you never seen", pid: "bag2"},
     // etc.
   ]);
 
