@@ -14,7 +14,7 @@ module.exports = {
         if (typeof msg === "undefined")
           return res.badRequest(+"Form-data not received.");
     
-        await Messgae.create(product);
+        await Messgae.create(msg);
         res.json({result: 'success', msg: req.body});
     
     },

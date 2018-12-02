@@ -13,18 +13,14 @@ module.exports = {
       type: "string"
     },
 
-    title: {
-      type: "string"
-    },
-
     content: {
       type: "string"
     },
 
-    oid: {
+    pid: {
       type: "string"
     }
-
+    
   },
 
 };
