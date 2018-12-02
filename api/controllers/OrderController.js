@@ -118,47 +118,67 @@ module.exports = {
 
     totalSales : async function(req, res) {
 
-        var objs = await Order.find();
-        var sale = 0;
+        var orders = await Order.find({confirmedState : true});
+        var sale = Object();
+        sale.count = 0;
+        console.log(orders);
 
-        for(k in objs){
-            sale = sale + orders.fee
+        for(var i = 0; i < orders.length; i++){
+            sale.count += orders[i].fee;
         }
+
         res.send(sale);
+        console.log(sale);
     
     },
 
     personalSale : async function(req, res) {
 
         var order = req.body;
-        var orders = await Order.find({Where : {owner : order.owner, comfirmedState : 'true'}});
-        var sale = 0;
+        var orders = await Order.find({
+            where: { owner : order.owner, confirmedState : true}});
+        var sale = Object();
+        sale.count = 0;
+        console.log(orders);
 
-        for(k in orders){
-            sale = sale + orders.fee
+        for(var i = 0; i < orders.length; i++){
+            sale.count += orders[i].fee;
+
         }
+
         res.send(sale);
+        console.log(sale);
 
     },
 
     orderCount : async function(req, res) {
 
         var order = req.body;
-        var orders = await Order.find({Where : {owner : order.owner, comfirmedState : 'true'}});
-        var countList = new Array();
-        var i = 0;
-
-        for (k in orders){
-            countList[i] = orders.pid
-            if (countList[i] == orders.pid){
-                var count
-                i++;
-            }
-            else{
-
+        var orders = await Order.find({
+            where: { owner : order.owner, confirmedState : true}});
+        var products = await Product.find();
+        
+        var productList = new Array();
+        // for (product in products){
+        for (var i = 0; i < products.length; i++){
+            var item = new Object();
+            item.id = products[i].pid;
+            item.number = 0;
+            productList.push(item);
+        }
+        
+        console.log(orders);
+        
+        for (var i = 0; i < orders.length; i++){
+            for(var k = 0; k < productList.length; k++){
+                if(orders[i].pid == productList[k].id){
+                    productList[k].number += orders[i].amount
+                }
             }
         }
-        res.send(orders.length());
+        
+        console.log(productList);
+        res.send(productList);
 
     }
 

@@ -10,10 +10,5 @@
 
 module.exports.policies = {
 
-  UserController: {
-
-    create: 'isAdmin'
-
-}
 
 };

@@ -19,7 +19,7 @@ module.exports = {
         const saltRounds = 10;
         const hash = await sails.bcrypt.hash(user.password, saltRounds);    
 
-        await user.password.set(hash);
+        user.password = hash;
         await User.create(user);
         res.send({result: 'success', user: req.body});
     

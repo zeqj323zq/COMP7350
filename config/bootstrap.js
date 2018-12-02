@@ -25,13 +25,13 @@ module.exports.bootstrap = async function(done) {
   //
     
   await Order.createEach([
-    { oid: "201812101", date: "2018/12/1", cname: "Tom", phoneNumber: "13564", address:"China,HongKong,xxroad", pid:"bag1", amount:2, fee:80, confirmedState:false, owner: "Agent1"},
-    { oid: "201812102", date: "2018/12/1", cname: "Ant", phoneNumber: "1353523", address:"China,HongKong,bbroad", pid:"bag2", amount:1, fee:60, confirmedState:false, owner: "Agent2"},
+    { oid: "201812101", date: "2018/12/1", cname: "Tom", phoneNumber: "13564", address:"China,HongKong,xxroad", pid:"bag1", amount:2, fee:80, confirmedState:false, owner: "David"},
+    { oid: "201812102", date: "2018/12/1", cname: "Ant", phoneNumber: "1353523", address:"China,HongKong,bbroad", pid:"bag2", amount:1, fee:60, confirmedState:true, owner: "Frank"},
     { oid: "201812103", date: "2018/12/1", cname: "Tom", phoneNumber: "13564", address:"China,HongKong,xxroad", pid:"bag2", amount:3, fee:180, confirmedState:false, owner: "Company"},
-    { oid: "201812104", date: "2018/12/1", cname: "Bob", phoneNumber: "135123", address:"China,HongKong,aaroad", pid:"bag1", amount:4, fee:160, confirmedState:true,  owner: "Agent1"},
-    { oid: "201812105", date: "2018/12/1", cname: "David", phoneNumber: "135123", address:"China,HongKong,aaroad", pid:"bag1", amount:4, fee:160, confirmedState:true,  owner: "Agent1"},
-    { oid: "201812106", date: "2018/12/1", cname: "Jack", phoneNumber: "135457", address:"China,HongKong,aaroad", pid:"bag1", amount:3, fee:120, confirmedState:true,  owner: "Agent2"},
-    { oid: "201812107", date: "2018/12/1", cname: "Chirs", phoneNumber: "145677", address:"China,HongKong,aaroad", pid:"bag2", amount:5, fee:300, confirmedState:true,  owner: "Agent2"},
+    { oid: "201812104", date: "2018/12/1", cname: "Bob", phoneNumber: "135123", address:"China,HongKong,aaroad", pid:"bag1", amount:4, fee:160, confirmedState:true,  owner: "David"},
+    { oid: "201812105", date: "2018/12/1", cname: "David", phoneNumber: "135123", address:"China,HongKong,aaroad", pid:"bag1", amount:4, fee:160, confirmedState:true,  owner: "David"},
+    { oid: "201812106", date: "2018/12/1", cname: "Jack", phoneNumber: "135457", address:"China,HongKong,aaroad", pid:"bag1", amount:3, fee:120, confirmedState:true,  owner: "Frank"},
+    { oid: "201812107", date: "2018/12/1", cname: "Chirs", phoneNumber: "145677", address:"China,HongKong,aaroad", pid:"bag2", amount:5, fee:300, confirmedState:true,  owner: "Frank"},
     // etc.
   ]);
 
