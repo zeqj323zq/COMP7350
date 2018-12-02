@@ -14,7 +14,7 @@ module.exports = {
         if (typeof msg === "undefined")
           return res.badRequest(+"Form-data not received.");
     
-        await Messgae.create(msg);
+        await Message.create(msg);
         res.json({result: 'success', msg: req.body});
     
     },
@@ -22,7 +22,7 @@ module.exports = {
     show : async function(req, res) {
         //
         var msgs = await Message.find();
-        res.send({ Messages: msgs });
+        res.send({ messages: msgs });
     
     },
 

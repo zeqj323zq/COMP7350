@@ -32,6 +32,7 @@ module.exports.security = {
   allRoutes: true,
   allowOrigins: 'http://localhost:8080',
   allowCredentials: true,
+  allowOrigins: '*',
 },
 
 
