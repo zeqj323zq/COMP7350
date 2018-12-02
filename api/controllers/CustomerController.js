@@ -43,7 +43,7 @@ module.exports = {
         if (typeof customer === "undefined")
                 return res.badRequest("Form-data not received.");
     
-                var objs = await Product.update({id : customer.id}).set({
+                var objs = await customer.update({id : customer.id}).set({
                   cname: customer.cname,
                   oid: customer.oid,
                   phoneNumber: customer.phoneNumber,

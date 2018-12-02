@@ -29,7 +29,7 @@ module.exports = {
     delete : async function(req, res) {
         //
         var id = req.body.id;
-        var objs = await Product.destroy(id).fetch();
+        var objs = await message.destroy(id).fetch();
       
         if (objs.length == 0) 
         return res.notFound();
@@ -39,7 +39,7 @@ module.exports = {
     update : async function(req, res) {
         //
         var message = req.body;
-        if (typeof product === "undefined")
+        if (typeof message === "undefined")
                 return res.badRequest("Form-data not received.");
     
                 var objs = await Message.update({id : message.id}).set({
