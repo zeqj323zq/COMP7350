@@ -71,7 +71,7 @@ module.exports = {
         // }
         // res.send({ order : Obj });
         var order = req.body;
-        if (typeof order==="undefined"){
+        if (order==="undefined"){
             res.json({result: 'error'});
         }
         else{

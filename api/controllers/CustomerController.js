@@ -11,7 +11,7 @@ module.exports = {
 
         var customer = req.body;
     
-        if (typeof customer === "undefined")
+        if (customer === "undefined")
           return res.badRequest(+"Form-data not received.");
     
         await Customer.create(customer);
@@ -40,7 +40,7 @@ module.exports = {
     update : async function(req, res) {
         //
         var customer = req.body;
-        if (typeof customer === "undefined"){
+        if (customer === "undefined"){
                 return res.badRequest("Form-data not received.");
         }
         var objs = await Customer.update({id : customer.id}).set({

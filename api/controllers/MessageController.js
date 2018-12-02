@@ -11,7 +11,7 @@ module.exports = {
 
         var msg = req.body;
     
-        if (typeof msg === "undefined")
+        if (msg === "undefined")
           return res.badRequest(+"Form-data not received.");
     
         await Message.create(msg);
