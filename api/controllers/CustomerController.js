@@ -29,7 +29,7 @@ module.exports = {
     async delete(req, res) {
         //
         var name = req.body.cname;
-        var objs = await Product.destroy(name).fetch();
+        var objs = await Customer.destroy(name).fetch();
         res.json({result: 'success'});
       
         if (objs.length == 0) 

@@ -31,11 +31,11 @@ module.exports = {
 
     search : async function(req, res, err) {
         //
-        var orderId = req.params.oid;
-        var customerName = req.params.cname;
-        var pNumber = req.params.phoneNumber;
-        var ads = req.params.address;
-        var agent = req.params.owner;
+        var orderId = req.body.oid;
+        var customerName = req.body.cname;
+        var pNumber = req.body.phoneNumber;
+        var ads = req.body.address;
+        var agent = req.body.owner;
         if (typeof customerName!=="undefined"||typeof orderId!=="undefined"||typeof phoneNumber!=="undefined"||typeof address!=="undefined"||typeof agent!=="undefined"){
             var obj = await Order.find({
                 where: { oid : orderId, cname : customerName, phoneNumber : pNumber, address : ads, owner : agent}
