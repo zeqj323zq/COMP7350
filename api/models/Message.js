@@ -24,5 +24,4 @@ module.exports = {
   },
 
 };
-module.exports.Order = Order;
 

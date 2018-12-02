@@ -7,7 +7,7 @@
 
 module.exports = {
 
-    async create(req, res) {
+    create : async function(req, res) {
 
         var customer = req.body;
     
@@ -19,14 +19,14 @@ module.exports = {
     
     },
 
-    async show(req, res) {
+    show: async function(req, res) {
         //
         var objs = await Customer.find();
         res.send({ customers: objs });
     
     },
 
-    async delete(req, res) {
+    delete : async function(req, res) {
         //
         var id = req.body.id;
         var objs = await Customer.destroy(id).fetch();
@@ -37,7 +37,7 @@ module.exports = {
    
     },
 
-    async update(req, res) {
+    update : async function(req, res) {
         //
         var customer = req.body;
         if (typeof customer === "undefined"){

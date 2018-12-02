@@ -36,14 +36,12 @@ module.exports = {
         var pNumber = req.body.phoneNumber;
         var ads = req.body.address;
         var agent = req.body.owner;
-        if (typeof customerName!=="undefined"||typeof orderId!=="undefined"||typeof phoneNumber!=="undefined"||typeof address!=="undefined"||typeof agent!=="undefined"){
+        /*if (typeof customerName!=="undefined"||typeof orderId!=="undefined"||typeof phoneNumber!=="undefined"||typeof address!=="undefined"||typeof agent!=="undefined"){
             var obj = await Order.find({
                 where: { oid : orderId, cname : customerName, phoneNumber : pNumber, address : ads, owner : agent}
             });
                 res.send({ order : obj });
-            //var pObj = await Order.find(objs.pid);
-            //res.send({ product: pObj });
-        }
+        }*/
         /*if (typeof customerName!=="undefined"&&typeof orderId==="undefined"){
             var obj = await Order.find({
                 where: { cname : customerName }
@@ -52,9 +50,39 @@ module.exports = {
             //var pObj = await Order.find(objs.pid);
             //res.send({ product: pObj });
         }*/
+        var obj = new Object();
+
+        if (req.body!=="undefined"){
+            if (typeof orderID!=="undefined"){
+                obj = await Order.find({
+                    where: { oid : orderId }
+                });
+            }
+            if (typeof customerName!=="undefined"){
+                obj = await obj.find({
+                    where: { cname : customerName }
+                });
+            }
+            if (typeof pNumber!=="undefined"){
+                obj = await obj.find({
+                    where: { phoneNumber : pNumber }
+                });
+            }
+            if (typeof ads!=="undefined"){
+                obj = await obj.find({
+                    where: { address : ads }
+                });
+            }
+            if (typeof agent!=="undefined"){
+                obj = await obj.find({
+                    where: { owner : agent }
+                });
+            }
+        }
         else{
             res.json({result: 'error'});
         }
+        res.send({ order : Obj });
     
     },
 
