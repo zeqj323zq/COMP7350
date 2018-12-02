@@ -106,7 +106,7 @@ module.exports = {
         if (typeof product === "undefined")
                 return res.badRequest("Form-data not received.");
     
-                var objs = await Product.update(req.body.id).set({
+                var objs = await Product.update({id : product.id}).set({
                   pid: product.pid,
                   pType: product.pType,
                   color: product.color,
@@ -114,9 +114,9 @@ module.exports = {
                   price: product.price,
                   count: product.count,
               }).fetch();
-              res.json({result: 'success'});
       
               if (objs.length == 0) return res.notFound();
+              res.json({result: 'success'});
     
     },
 

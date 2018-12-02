@@ -28,11 +28,12 @@ module.exports = {
 
     delete : async function(req, res) {
         //
-        var id = req.params.pid;
+        var id = req.body.pid;
         var objs = await User.destroy(id).fetch();
       
         if (objs.length == 0) 
         return res.notFound();
+        res.json({result: 'success'});
     
     },
 
@@ -42,15 +43,15 @@ module.exports = {
         if (typeof user === "undefined")
                 return res.badRequest("Form-data not received.");
     
-                var objs = await User.update(req.body.username).set({
+                var objs = await User.update({id : user.id}).set({
                   username: user.username,
                   position: user.position,
                   password: user.passward,
                   phoneNumber: user.phoneNumber,
               }).fetch();
-              res.json({result: 'success'});
       
               if (objs.length == 0) return res.notFound();
+              res.json({result: 'success'});
     
     },
 

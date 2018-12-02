@@ -10,12 +10,13 @@ module.exports = {
     create : async function(req, res) {
 
         var order = req.body;
+        var newCount = Product.findOne({pid : order.pid}).count;
     
         if (typeof order === "undefined")
           return res.badRequest(+"Form-data not received.");
 
-        await order.fee.set(Product.findOne(order.pid).price*order.amount);
-        await Product.findOne(order.pid).count - order.amount;
+        //await order.fee.set(Product.findOne(order.pid).price*order.amount);
+        await Product.update({pid : order.pid}).set({count : newCount - order.amount});
         await order.create(order);
         res.json({result: 'success', order: req.body});
     
@@ -75,7 +76,7 @@ module.exports = {
         var order = req.body;
         if (typeof order === "undefined")
             return res.badRequest("Form-data not received.");
-        var objs = await Order.update(order.id).set({
+        var objs = await Order.update({id : order.id}).set({
             oid: order.oid,
             date: order.date,
             cname: order.cname,
@@ -93,10 +94,10 @@ module.exports = {
     totalSales : async function(req, res) {
 
         var objs = await Order.find();
+        var sale = 0;
 
         for(k in objs){
-            var sale = 0;
-            sale = temp + orders.fee
+            sale = sale + orders.fee
         }
         res.send(sale);
     

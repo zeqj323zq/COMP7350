@@ -26,10 +26,11 @@ module.exports = {
     
     },
 
-    async delete(req, res, ) {
+    async delete(req, res) {
         //
-        var name = req.params.cname;
+        var name = req.body.cname;
         var objs = await Product.destroy(name).fetch();
+        res.json({result: 'success'});
       
         if (objs.length == 0) 
         return res.notFound();
@@ -42,15 +43,15 @@ module.exports = {
         if (typeof customer === "undefined")
                 return res.badRequest("Form-data not received.");
     
-                var objs = await Product.update(req.body.cname).set({
+                var objs = await Product.update({id : customer.id}).set({
                   cname: customer.cname,
                   oid: customer.oid,
                   phoneNumber: customer.phoneNumber,
                   address: customer.address,
               }).fetch();
-              res.json({result: 'success'});
       
               if (objs.length == 0) return res.notFound();
+              res.json({result: 'success'});
     
     },
 

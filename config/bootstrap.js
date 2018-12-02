@@ -40,18 +40,6 @@ module.exports.bootstrap = async function(done) {
     // etc.
   ]);
 
-  owner: {
-    type: "string"
-  },
-
-  content: {
-    type: "string"
-  },
-
-  pid: {
-    type: "string"
-  }
-
   await Message.createEach([
     { owner: "Agent1", content: "Good product today!", pid: "bag1"},
     { owner: "Agent2", content: "Thsi one is really good！", pid: "bag2"},
