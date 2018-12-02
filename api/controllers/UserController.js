@@ -13,11 +13,11 @@ module.exports = {
 
         var user = req.body;
 
-        const saltRounds = 10;
-        const hash = await sails.bcrypt.hash(user.passward, saltRounds);
-    
-        if (typeof user === "undefined")
+        if (user === "undefined")
           return res.badRequest(+"Form-data not received.");
+
+        const saltRounds = 10;
+        const hash = await sails.bcrypt.hash(user.password, saltRounds);    
 
         await user.password.set(hash);
         await User.create(user);

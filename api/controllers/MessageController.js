@@ -54,16 +54,5 @@ module.exports = {
     
     },
 
-    personalSale : async function(req, res) {
-        var msg = req.body;
-        var orders = await Order.find({owner : msg.owner});
-        var sale = 0;
-
-        for(k in orders){
-            sale = sale + orders.fee
-        }
-        res.send(sale);
-    }
-
 };
 

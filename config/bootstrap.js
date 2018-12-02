@@ -23,17 +23,15 @@ module.exports.bootstrap = async function(done) {
   //   return done();
   // }
   //
-  await User.createEach([
-    { "username": "admin", "password": "123456" },
-    { "username": "boss", "password": "123456" }
-    // etc.
-  ]);
     
   await Order.createEach([
-    { oid: "201812101", date: "2018/12/1", cname: "Tom", phoneNumber: "13564", address:"China,HongKong,xxroad", pid:"bag1", amount:2, fee:40, confirmedState:false, owner: "Agent1"},
-    { oid: "201812102", date: "2018/12/1", cname: "Ant", phoneNumber: "1353523", address:"China,HongKong,bbroad", pid:"bag2", amount:1, fee:30, confirmedState:false, owner: "Agent2"},
-    { oid: "201812103", date: "2018/12/1", cname: "Tom", phoneNumber: "13564", address:"China,HongKong,xxroad", pid:"bag2", amount:3, fee:80, confirmedState:false, owner: "Company"},
-    { oid: "201812104", date: "2018/12/1", cname: "Bob", phoneNumber: "135123", address:"China,HongKong,aaroad", pid:"bag1", amount:4, fee:120, confirmedState:true,  owner: "Company"},
+    { oid: "201812101", date: "2018/12/1", cname: "Tom", phoneNumber: "13564", address:"China,HongKong,xxroad", pid:"bag1", amount:2, fee:80, confirmedState:false, owner: "Agent1"},
+    { oid: "201812102", date: "2018/12/1", cname: "Ant", phoneNumber: "1353523", address:"China,HongKong,bbroad", pid:"bag2", amount:1, fee:60, confirmedState:false, owner: "Agent2"},
+    { oid: "201812103", date: "2018/12/1", cname: "Tom", phoneNumber: "13564", address:"China,HongKong,xxroad", pid:"bag2", amount:3, fee:180, confirmedState:false, owner: "Company"},
+    { oid: "201812104", date: "2018/12/1", cname: "Bob", phoneNumber: "135123", address:"China,HongKong,aaroad", pid:"bag1", amount:4, fee:160, confirmedState:true,  owner: "Agent1"},
+    { oid: "201812105", date: "2018/12/1", cname: "David", phoneNumber: "135123", address:"China,HongKong,aaroad", pid:"bag1", amount:4, fee:160, confirmedState:true,  owner: "Agent1"},
+    { oid: "201812106", date: "2018/12/1", cname: "Jack", phoneNumber: "135457", address:"China,HongKong,aaroad", pid:"bag1", amount:3, fee:120, confirmedState:true,  owner: "Agent2"},
+    { oid: "201812107", date: "2018/12/1", cname: "Chirs", phoneNumber: "145677", address:"China,HongKong,aaroad", pid:"bag2", amount:5, fee:300, confirmedState:true,  owner: "Agent2"},
     // etc.
   ]);
 
@@ -44,8 +42,8 @@ module.exports.bootstrap = async function(done) {
   ]);
 
   await Message.createEach([
-    { owner: "Agent1", content: "Good product today!", pid: "bag1"},
-    { owner: "Agent2", content: "Thsi one is really good！", pid: "bag2"},
+    { owner: "David", content: "Good product today!", pid: "bag1"},
+    { owner: "Frank", content: "Thsi one is really good！", pid: "bag2"},
     { owner: "Company", content: "The new product you never seen0", pid: "bag2"},
     // etc.
   ]);
@@ -53,15 +51,9 @@ module.exports.bootstrap = async function(done) {
   const hash = await sails.bcrypt.hash('123456', saltRounds);
 
   await User.createEach([
-    { "username": "Johnson", "position": "company", "phoneNumber": "123456", "address": "xxxx", "password": hash },
-    { "username": "Chirs", "position": "company", "phoneNumber": "123456", "address": "xxxx", "password": hash },
-    { "username": "Bill", "position": "company", "phoneNumber": "123456", "address": "xxxx", "password": hash },
-    { "username": "Matt", "position": "company", "phoneNumber": "123456", "address": "xxxx", "password": hash },
-    { "username": "Frank", "position": "agent", "phoneNumber": "123456", "address": "xxxx", "password": hash },
-    { "username": "David", "position": "agent", "phoneNumber": "123456", "address": "xxxx", "password": hash },
-    { "username": "Agent1", "position": "agent", "phoneNumber": "123456", "address": "xxxx", "password": hash },
-    { "username": "Agent2", "position": "agent", "phoneNumber": "123456", "address": "xxxx", "password": hash },
-    { "username": "Company", "position": "company", "phoneNumber": "123456", "address": "xxxx", "password": hash },
+    { "username": "Company", "position": "company", "phoneNumber": "123456", "address": "China,HK,xx oad", "password": hash },
+    { "username": "Frank", "position": "agent", "phoneNumber": "123456", "address": "China,HK,12 Road", "password": hash },
+    { "username": "David", "position": "agent", "phoneNumber": "123456", "address": "China,HK,AB Road", "password": hash },
     // etc.
   ]);
 

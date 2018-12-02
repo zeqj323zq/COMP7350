@@ -127,5 +127,39 @@ module.exports = {
     
     },
 
+    personalSale : async function(req, res) {
+
+        var order = req.body;
+        var orders = await Order.find({Where : {owner : order.owner, comfirmedState : 'true'}});
+        var sale = 0;
+
+        for(k in orders){
+            sale = sale + orders.fee
+        }
+        res.send(sale);
+
+    },
+
+    orderCount : async function(req, res) {
+
+        var order = req.body;
+        var orders = await Order.find({Where : {owner : order.owner, comfirmedState : 'true'}});
+        var countList = new Array();
+        var i = 0;
+
+        for (k in orders){
+            countList[i] = orders.pid
+            if (countList[i] == orders.pid){
+                var count
+                i++;
+            }
+            else{
+
+            }
+        }
+        res.send(orders.length());
+
+    }
+
 };
 
