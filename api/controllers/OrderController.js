@@ -137,53 +137,58 @@ module.exports = {
         var agent = req.body;
         var orders = await Order.find({
             where: { owner : agent.username, confirmedState : true}});
-        var sale = Object();
-        sale.count = 0;
-        console.log(orders);
-
-        for(var i = 0; i < orders.length; i++){
-            sale.count += orders[i].fee;
-
+        
+        var sale = 0;
+        if(orders.length == 0) {
+            res.send("0");
+        } else {
+            for(var i = 0; i < orders.length; i++){
+                console.log(typeof(orders[i].fee));
+                sale += orders[i].fee;
+            }
+            res.send(sale.toString());
         }
-
-        res.send(sale);
         console.log(sale);
-
     },
 
     orderCount : async function(req, res) {
 
-        var order = req.body;
+        var agent = req.body;
         var orders = await Order.find({
-            where: { owner : order.owner, confirmedState : true}});
+            where: { owner : agent.username, confirmedState : true}});
         var products = await Product.find();
         
         var productList = new Array();
-        // for (product in products){
-        for (var i = 0; i < products.length; i++){
+
+        if(orders.length == 0) {
             var item = new Object();
-            item.id = products[i].pid;
+            item.id = "No Product";
             item.number = 0;
             item.sale = 0;
             productList.push(item);
-        }
-        
-        console.log(orders);
-        
-        for (var i = 0; i < orders.length; i++){
-            for(var k = 0; k < productList.length; k++){
-                if(orders[i].pid == productList[k].id){
-                    var obj = await Product.findOne({pid : orders[i].pid});
-                    productList[k].number += orders[i].amount;
-                    productList[k].sale += orders[i].amount*obj.price;
+            console.log(productList);
+            res.send(productList);
+        } else {
+            for (var i = 0; i < products.length; i++){
+                var item = new Object();
+                item.id = products[i].pid;
+                item.number = 0;
+                item.sale = 0;
+                productList.push(item);
+            }
+            console.log(orders);  
+            for (var i = 0; i < orders.length; i++){
+                for(var k = 0; k < productList.length; k++){
+                    if(orders[i].pid == productList[k].id){
+                        var obj = await Product.findOne({pid : orders[i].pid});
+                        productList[k].number += orders[i].amount;
+                        productList[k].sale += orders[i].amount*obj.price;
+                    }
                 }
             }
+            console.log(productList);
+            res.send(productList);
         }
-        
-        console.log(productList);
-        res.send(productList);
-
     }
-
 };
 
