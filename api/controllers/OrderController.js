@@ -134,9 +134,9 @@ module.exports = {
 
     personalSale : async function(req, res) {
 
-        var order = req.body;
+        var agent = req.body;
         var orders = await Order.find({
-            where: { owner : order.owner, confirmedState : true}});
+            where: { owner : agent.username, confirmedState : true}});
         var sale = Object();
         sale.count = 0;
         console.log(orders);
